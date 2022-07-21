@@ -31,31 +31,8 @@ touch /usr/local/nginx/logs/access.log
 COPY nginx.conf /usr/local/nginx/conf/nginx.conf
 COPY index.html data/www/index.html
 
-# вот до этого момента все ОК
-# если собрать, запустить, войти в контейнер и сделать:
-# >> cd /usr/local/nginx/sbin
-# >> ./nginx
-# >> curl 127.0.0.1
-# возвращает мою index.html
+CMD ["/usr/local/nginx/sbin/nginx", "-g", "daemon off;"]
 
-# АВТОМАТИЗИРУЕМ так сказать:
-
-
-# вариант 1
-# CMD ["/usr/local/nginx/sbin/nginx"]
-
-# вариант 2 
-# RUN /usr/local/nginx/sbin/nginx
-
-# вариант 3
-# CMD ["/usr/local/nginx/sbin/nginx", "-g", "daemon off;"]
-
-# вариант 4 - кринж
-RUN cd local/nginx/sbin && ./nginx 
-#вывод курла 
-#root@53ad2e42409d:/usr# curl 127.0.0.1
-#curl: (7) Failed to connect to 127.0.0.1 port 80: Connection refused
-#но если сделать по схеме на строках 36-38 этого фала, все ок выдает 
 
 
 
